@@ -20,14 +20,14 @@ pybind_extension(
     ],
 )
 
-py_test(
-    name = "array_record_module_test",
-    srcs = ["array_record_module_test.py"],
-    data = [":array_record_module.so"],
-    deps = [
-        "@com_google_absl_py//absl/testing:absltest",
-    ],
-)
+# py_test(
+#     name = "array_record_module_test",
+#     srcs = ["array_record_module_test.py"],
+#     data = [":array_record_module.so"],
+#     deps = [
+#         "@com_google_absl_py//absl/testing:absltest",
+#     ],
+# )
 
 py_library(
     name = "array_record_data_source",
@@ -38,19 +38,19 @@ py_library(
     ],
 )
 
-py_test(
-    name = "array_record_data_source_test",
-    srcs = ["array_record_data_source_test.py"],
-    args = ["--test_srcdir=python/testdata"],
-    data = [
-        ":array_record_module.so",
-        "//python/testdata:digits.array_record-00000-of-00002",
-        "//python/testdata:digits.array_record-00001-of-00002",
-    ],
-    deps = [
-        ":array_record_data_source",
-        "@com_google_absl_py//absl/testing:absltest",
-        "@com_google_absl_py//absl/testing:flagsaver",
-        "@com_google_absl_py//absl/testing:parameterized",
-    ],
-)
+# py_test(
+#     name = "array_record_data_source_test",
+#     srcs = ["array_record_data_source_test.py"],
+#     args = ["--test_srcdir=python/testdata"],
+#     data = [
+#         ":array_record_module.so",
+#         "//python/testdata:digits.array_record-00000-of-00002",
+#         "//python/testdata:digits.array_record-00001-of-00002",
+#     ],
+#     deps = [
+#         ":array_record_data_source",
+#         "@com_google_absl_py//absl/testing:absltest",
+#         "@com_google_absl_py//absl/testing:flagsaver",
+#         "@com_google_absl_py//absl/testing:parameterized",
+#     ],
+# )

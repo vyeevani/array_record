@@ -23,6 +23,9 @@ function write_to_bazelrc() {
 }
 
 function main() {
+  echo "=== Installing setuptools"
+  ${PYTHON_BIN} -m pip install --upgrade pip
+  ${PYTHON_BIN} -m pip install setuptools
   # Remove .bazelrc if it already exists
   [ -e .bazelrc ] && rm .bazelrc
   write_to_bazelrc "common --enable_bzlmod"
@@ -84,6 +87,11 @@ function main() {
   popd
 
   echo $(date) : "=== Output wheel file is in: ${DEST}"
+
+  # Install the wheel
+  WHEEL_FILE=$(ls -t ${DEST}/*.whl | head -n 1)
+  echo $(date) : "=== Installing wheel: ${WHEEL_FILE}"
+  ${PYTHON_BIN} -m pip install --force-reinstall ${WHEEL_FILE}
 }
 
 main

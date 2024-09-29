@@ -1,0 +1,49 @@
+name: Build and Save Python Wheel
+
+on:
+  push:
+    branches:
+      - '**'    # Trigger on any branch push
+  pull_request:
+    branches:
+      - '**'    # Trigger on any branch pull request
+
+jobs:
+  build:
+    runs-on: macos-latest
+
+    steps:
+      # Checkout the repository on the current branch
+      - name: Checkout repository
+        uses: actions/checkout@v3
+        with:
+          fetch-depth: 0  # Ensures that the full history is cloned to handle any branch-specific build needs
+
+      # Setup Python and install setuptools
+      - name: Setup Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.10'
+
+      - name: Install setuptools
+        run: |
+          python -m pip install --upgrade pip
+          python -m pip install setuptools wheel
+
+      # Run the build script and capture the output directory
+      - name: Run build script
+        id: build
+        run: |
+          chmod +x ./oss/build_whl.sh
+          ./oss/build_whl.sh
+      
+      - name: List all files in the output directory
+        run: |
+          echo "Listing all files in /tmp/array_record/all_dist:"
+          ls -l /tmp/array_record/all_dist
+      
+      - name: Upload artifacts
+        uses: actions/upload-artifact@v3
+        with:
+          name: built-wheels
+          path: /tmp/array_record/all_dist
