@@ -47,3 +47,10 @@ jobs:
         with:
           name: built-wheels
           path: /tmp/array_record/all_dist
+
+      - name: Create GitHub Release
+        uses: softprops/action-gh-release@v1
+        with:
+          files: /tmp/array_record/all_dist/*.whl
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
