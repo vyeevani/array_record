@@ -18,6 +18,13 @@ jobs:
         uses: actions/checkout@v3
         with:
           fetch-depth: 0  # Ensures that the full history is cloned to handle any branch-specific build needs
+      
+      - name: Create Tag
+        run: |
+          git config --global user.name "github-actions"
+          git config --global user.email "github-actions@github.com"
+          git tag -a v1.0.${{ github.run_number }} -m "Release version v1.0.${{ github.run_number }}"
+          git push origin v1.0.${{ github.run_number }}
 
       # Setup Python and install setuptools
       - name: Setup Python
