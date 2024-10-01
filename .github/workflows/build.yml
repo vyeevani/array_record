@@ -42,6 +42,10 @@ jobs:
         id: build
         run: |
           bazel build ...
+
+      - name: Run Bazel Tests
+        run: |
+          bazel test ...
                 
       - name: Upload artifacts
         uses: actions/upload-artifact@v3
