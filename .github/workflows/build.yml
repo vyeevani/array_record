@@ -42,12 +42,7 @@ jobs:
         id: build
         run: |
           bazel build ...
-      
-      - name: List all files in the output directory
-        run: |
-          echo "Listing all files in /tmp/array_record/all_dist:"
-          ls -l /tmp/array_record/all_dist
-      
+                
       - name: Upload artifacts
         uses: actions/upload-artifact@v3
         with:
