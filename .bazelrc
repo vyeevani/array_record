@@ -1,0 +1,7 @@
+common --enable_bzlmod
+build -c opt
+build --cxxopt=-std=c++17
+build --host_cxxopt=-std=c++17
+build --experimental_repo_remote_exec
+build --python_path="/opt/miniconda3/envs/robot/bin/python3"
+build --toolchain_resolution_debug='@@rules_python//python/cc:toolchain_type'
