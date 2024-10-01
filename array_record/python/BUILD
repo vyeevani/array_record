@@ -1,6 +1,6 @@
 # Python binding for ArrayRecord
 load("@pybind11_bazel//:build_defs.bzl", "pybind_extension")
-load("@pypi//:requirements.bzl", "requirement")
+load("@pypi_array_record//:requirements.bzl", "requirement")
 load("@rules_python//python:packaging.bzl", "py_wheel")
 
 package(default_visibility = ["//visibility:public"])

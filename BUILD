@@ -2,7 +2,7 @@ load("@rules_python//python:defs.bzl", "py_binary", "py_test")
 load("@rules_python//python:pip.bzl", "compile_pip_requirements")
 load("@rules_python//python:packaging.bzl", "py_wheel", 'py_package')
 
-
+package(default_visibility = ["//visibility:public"])
 
 compile_pip_requirements(
     name = "requirements",
