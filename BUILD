@@ -14,6 +14,10 @@ py_wheel(
     name = "array_record_wheel",
     distribution = "array_record",
     version = "0.6.0",
+    platform = select({
+        "@platforms//os:macos": "macosx_14_0_arm64",
+        "@platforms//os:linux": "manylinux2014_x86_64",
+    }),
     deps = [
         "//array_record/python:array_record_data_source",
         "//array_record/python:array_record_module",
