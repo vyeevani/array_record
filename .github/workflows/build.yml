@@ -41,8 +41,7 @@ jobs:
       - name: Run build script
         id: build
         run: |
-          chmod +x ./oss/build_whl.sh
-          ./oss/build_whl.sh
+          bazel build ...
       
       - name: List all files in the output directory
         run: |
@@ -53,12 +52,12 @@ jobs:
         uses: actions/upload-artifact@v3
         with:
           name: built-wheels
-          path: /tmp/array_record/all_dist
+          path: bazel-bin/*.whl
 
       - name: Create GitHub Release
         uses: softprops/action-gh-release@v1
         with:
           tag_name: v1.0.${{ github.run_number }}
-          files: /tmp/array_record/all_dist/*.whl
+          files: bazel-bin/*.whl
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}

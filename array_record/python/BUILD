@@ -1,6 +1,7 @@
 # Python binding for ArrayRecord
 load("@pybind11_bazel//:build_defs.bzl", "pybind_extension")
 load("@pypi//:requirements.bzl", "requirement")
+load("@rules_python//python:packaging.bzl", "py_wheel")
 
 package(default_visibility = ["//visibility:public"])
 
@@ -18,6 +19,7 @@ pybind_extension(
         "@com_google_riegeli//riegeli/bytes:fd_reader",
         "@com_google_riegeli//riegeli/bytes:fd_writer",
     ],
+    visibility = ["//visibility:public"],
 )
 
 py_test(
@@ -35,19 +37,25 @@ py_library(
     srcs = ["array_record_data_source.py"],
     data = [":array_record_module.so"],
     deps = [
-        # Implicit etils (/epath) dependency.
         requirement("etils")
     ],
+    visibility = ["//visibility:public"],
+)
+
+py_library(
+    name = "init",
+    srcs = ["__init__.py"],
+    visibility = ["//visibility:public"],
 )
 
 py_test(
     name = "array_record_data_source_test",
     srcs = ["array_record_data_source_test.py"],
-    args = ["--test_srcdir=python/testdata"],
+    args = ["--test_srcdir=array_record/python/testdata"],
     data = [
         ":array_record_module",
-        "//python/testdata:digits.array_record-00000-of-00002",
-        "//python/testdata:digits.array_record-00001-of-00002",
+        "//array_record/python/testdata:digits.array_record-00000-of-00002",
+        "//array_record/python/testdata:digits.array_record-00001-of-00002",
     ],
     deps = [
         ":array_record_data_source",
