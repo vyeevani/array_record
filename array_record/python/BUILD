@@ -29,7 +29,7 @@ py_test(
     deps = [
         "@com_google_absl_py//absl/testing:absltest",
     ],
-    imports = ["."]
+    imports = ["../.."]
 )
 
 py_library(
@@ -58,10 +58,11 @@ py_test(
         "//array_record/python/testdata:digits.array_record-00001-of-00002",
     ],
     deps = [
+        ":init",
         ":array_record_data_source",
         "@com_google_absl_py//absl/testing:absltest",
         "@com_google_absl_py//absl/testing:flagsaver",
         "@com_google_absl_py//absl/testing:parameterized",
     ],
-    imports = ["."]
+    imports = ["../.."]
 )
